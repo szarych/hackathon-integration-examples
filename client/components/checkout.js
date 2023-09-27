@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export function Card() {
   const [checkoutInstance, setCheckoutInstance] = useState(undefined);
+  const [cards, setCards] = useState([]);
 
   useEffect(() => {
     window.Worldpay.checkout.init(
@@ -45,6 +46,16 @@ export function Card() {
     );
   }, []);
 
+  function createVerifiedToken(session) {
+    request
+    .post('/addCard')
+    .then(response => {
+        this.setState({
+            message: response.data,
+        });
+    });
+  }
+
   function generateSession () {
     checkoutInstance.generateSessionState(
       function (error, session) {
@@ -54,6 +65,7 @@ export function Card() {
         }
 
         console.log(session)
+        // createVerifiedToken(session);
       });
   }
 
