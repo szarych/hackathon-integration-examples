@@ -140,16 +140,20 @@ a {
 }
 
 .cardList .item {
-    background: grey;
-    height: 20px;
+    background: white;
+    color: black;
+    height: 30px;
+    margin-bottom: 1rem;
     padding-top: 1rem;
     padding-left: 1rem;
     padding-bottom: 1rem;
     border-radius: 1.5rem;
-    position: relative;
-    z-index: 999;
+    text-align: center;
 }
 
+.brand-text {
+    color: black;
+};
 
 .footer {
     position: absolute;

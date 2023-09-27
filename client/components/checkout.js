@@ -166,9 +166,9 @@ export function CardList({cards}) {
           <div className="front">
             <div>
               {cards.map((card, index) => (
-                <><div key={index} className="item">
-                  {card.brand}
-                </div><div style={{paddingTop: 10}}></div></>
+                <div key={index} className="item">
+                  <div className="brand-text">{card.brand}</div>
+                </div>
               ))
             }
             </div>
