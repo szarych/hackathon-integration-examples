@@ -39,6 +39,7 @@
   },
   "dependencies": {
     "axios": "^0.18.0",
+    "body-parser": "^1.20.2",
     "dotenv": "^16.3.1",
     "express": "^4.16.3",
     "react": "^16.3.2",
