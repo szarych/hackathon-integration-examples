@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
-
+ 
 export function Card() {
   const [checkoutInstance, setCheckoutInstance] = useState(undefined);
-  const cards = [];
+  const [cards, setCards] = useState([]); 
 
   useEffect(() => {
     window.Worldpay.checkout.init(
@@ -47,6 +47,18 @@ export function Card() {
     );
   }, []);
 
+  useEffect(() => {
+    console.log("Cards: ", cards);
+  }, [cards])
+
+  function mapCard(verifiedToken) {
+    return {
+      brand: verifiedToken._embedded.token.paymentInstrument.brand,
+      cardNumber: verifiedToken._embedded.token.paymentInstrument.cardNumber,
+      tokenPaymentInstrument:  verifiedToken._embedded.token.tokenPaymentInstrument,
+    }
+  }
+
   function createVerifiedToken(session) {
     axios
       .post('/api/addCard', {
@@ -68,17 +80,14 @@ export function Card() {
       })
       .then(response => {
         console.log("VerifiedToken: ", response.data);
-        cards.push(response.data);
+        setCards((cards) => [ ...cards, mapCard(response.data)]);
       })
       .catch((error) => {
         if (error.response) {
             console.log("VerifiedToken: ", error.response.data);
-            cards.push(error.response.data);
+            setCards((cards) => [ ...cards, mapCard(error.response.data)]);
         }
-      })
-      .finally(() => {
-        console.log("Cards: ", cards);
-      })
+      })      
   }
 
   function generateSession () {
