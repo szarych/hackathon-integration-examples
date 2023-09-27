@@ -5,7 +5,7 @@ const PROD = process.env.NODE_ENV === 'production';
 const DEV = !PROD;
 
 module.exports = {
-    entry: './server/index.js',
+    entry: ['babel-polyfill', './server/index.js'],
 
     target: 'node',
 
