@@ -10,12 +10,14 @@ export const App = () => {
 
   return (
     <CardsContext.Provider value={{ cards, addCard }}>
-      <section className="container">
-          <section className="wrapper">
-              <Card />
-              <CardList cards={cards} />
+      <section className="container" style={{display: 'flex', flexDirection: 'row'}}>
+          <section className="wrapper" style={{marginRight: '1rem'}}>
+            <Card />
           </section>
-          {JSON.stringify(cards)}
+          <section className="wrapper">
+            <CardList cards={cards} />
+            {/* {JSON.stringify(cards)} */}
+          </section>
       </section>
     </CardsContext.Provider>
   );
