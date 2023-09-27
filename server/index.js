@@ -11,9 +11,12 @@ const PROD = process.env.NODE_ENV === 'production';
 const encodedCredentials = btoa(process.env.wpUsername + ':' + process.env.wpPassword);
 
 const vtEndpoint = 'https://try.access.worldpay.com/verifiedTokens/cardOnFile';
-const tokenHeaders = {
+const vtHeaders = {
     'Content-Type': 'application/vnd.worldpay.verified-tokens-v3.hal+json',
     Accept: 'application/vnd.worldpay.verified-tokens-v3.hal+json',
+}
+
+const authHeader = {
     Authorization: `Basic ${encodedCredentials}`,
 }
 
@@ -46,8 +49,9 @@ app.post('/api/addCard', async (req, res) => {
             },
             "verificationCurrency": "GBP"
         }
-
-        const response = await axios.post(vtEndpoint, reqBody, { headers: tokenHeaders })
+        const response = await axios.post(vtEndpoint, reqBody, { 
+            headers: Object.assign(vtHeaders, authHeader)
+        })
         res.status(response.status).send(response.data);
     } catch (error) {
         console.log(error)
@@ -59,7 +63,7 @@ app.post('/api/addCard', async (req, res) => {
 
 app.delete('/api/deleteCard', async (req, res) => {
     try {
-        const response = await axios.delete(req.body.tokenHref)
+        const response = await axios.delete(req.body.tokenHref, { headers: authHeader })
         res.status(response.status).send(response.data);
     }
     catch (error) {
