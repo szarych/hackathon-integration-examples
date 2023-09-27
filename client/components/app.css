@@ -31,7 +31,11 @@ h2 {
 p {
     color: #eee;
 }
-
+ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    }
 a {
     text-decoration: none;
 }
@@ -133,27 +137,40 @@ a {
 .cardList .front {
     background: #015b7e;
     min-height: 200px;
-    /* padding-top: 3.8rem; */
+    padding: 1rem;
     border-radius: 1.5rem;
     position: relative;
     z-index: 999;
 }
-
-.cardList .item {
-    background: white;
-    color: black;
-    height: 30px;
+.cardList .front h2 {
+    font-size: 1.2rem;
+    margin: 0;
     margin-bottom: 1rem;
-    padding-top: 1rem;
-    padding-left: 1rem;
-    padding-bottom: 1rem;
-    border-radius: 1.5rem;
-    text-align: center;
 }
 
-.brand-text {
+.cardList .item {
+    background: #09364c;
     color: black;
-};
+    margin-bottom: .5rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border-radius: 1.5rem;
+}
+.cardList .item {
+    cursor: pointer;
+}
+.cardList .item.active {
+    background: #071319;
+}
+.cardList .item img {
+    height: 1rem;
+}
+
+.cardList .item span {
+    color: #fff;
+}
 
 .footer {
     position: absolute;
