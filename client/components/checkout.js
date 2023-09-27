@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
+import axios from 'axios';
 
 export function Card() {
   const [checkoutInstance, setCheckoutInstance] = useState(undefined);
-  const [cards, setCards] = useState([]);
+  const cards = [];
 
   useEffect(() => {
     window.Worldpay.checkout.init(
@@ -47,13 +48,37 @@ export function Card() {
   }, []);
 
   function createVerifiedToken(session) {
-    request
-    .post('/api/addCard')
-    .then(response => {
-        this.setState({
-            message: response.data,
-        });
-    });
+    axios
+      .post('/api/addCard', {
+        "paymentInstrument": {
+          "type": "card/checkout",
+          "cardHolderName": "Sherlock Holmes",
+          "sessionHref": session,
+          "billingAddress": {
+            "address1": "221B Baker Street",
+            "postalCode": "NW1 6XE",
+            "city": "London",
+            "countryCode": "GB",
+          }
+        },
+        "merchant": {
+          "entity": "MindPalaceLtd"
+        },
+        "verificationCurrency": "GBP"
+      })
+      .then(response => {
+        console.log("VerifiedToken: ", response.data);
+        cards.push(response.data);
+      })
+      .catch((error) => {
+        if (error.response) {
+            console.log("VerifiedToken: ", error.response.data);
+            cards.push(error.response.data);
+        }
+      })
+      .finally(() => {
+        console.log("Cards: ", cards);
+      })
   }
 
   function generateSession () {
@@ -64,7 +89,7 @@ export function Card() {
           return;
         }
 
-        console.log(session)
+        console.log("Session: ", session);
         createVerifiedToken(session);
       });
   }
