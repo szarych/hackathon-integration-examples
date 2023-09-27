@@ -1,5 +1,6 @@
 import express from "express";
 import axios from 'axios';
+import bodyParser from "body-parser";
 
 const dotenv = require('dotenv');
 dotenv.config();
@@ -20,12 +21,35 @@ if (PROD) {
     app.use('/', express.static('dist'));
 }
 
+app.use(bodyParser.json())
+
 app.post('/api/addCard', async (req, res) => {
     try {
         const reqBody = {
+            "paymentInstrument": {
+                "type": "card/plain",
+                "cardHolderName": req.body.cardHolderName,
+                "cardNumber": req.body.cardNumber,
+                "cardExpiryDate": {
+                  "month": req.body.cardExpiryDate.month,
+                  "year": req.body.cardExpiryDate.year
+                },
+                "cvc": req.body.cvc,
+                "billingAddress": {
+                  "address1": req.body.address1,
+                  "postalCode": req.body.postalCode,
+                  "city": req.body.city,
+                  "countryCode": req.body.countryCode
+                }
+              },
+              "merchant": {
+                "entity": "default"
+              },
+              "verificationCurrency": "GBP"
         }
+
         const response = await axios.post(vtEndpoint, reqBody, { headers: tokenHeaders })
-        res.send(response);
+        res.send(response.data);
     } catch (error) {
         console.log(error)
         res.status(error.response.status)
