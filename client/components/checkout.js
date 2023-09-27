@@ -94,3 +94,51 @@ export function Card() {
     </div>
   );
 }
+
+export function CardList({cards}) {
+  console.log(cards);
+  useEffect(() => {
+  }, []);
+
+  function createVerifiedToken(session) {
+    request
+    .post('/addCard')
+    .then(response => {
+        this.setState({
+            message: response.data,
+        });
+    });
+  }
+
+  function generateSession () {
+    checkoutInstance.generateSessionState(
+      function (error, session) {
+        if (error) {
+          console.warn(`Failed to generate session: ${error}`);
+          return;
+        }
+
+        console.log(session)
+        // createVerifiedToken(session);
+      });
+  }
+
+  return (
+    <div>
+      <h1 className="title">CardList</h1>
+
+      <div className="cardList" id="cardList">
+          <div className="front">
+            <div>
+              {cards.map((card, index) => (
+                <><div key={index} className="item">
+                  {card.brand}
+                </div><div style={{paddingTop: 10}}></div></>
+              ))
+            }
+            </div>
+          </div>
+      </div>
+    </div>
+  );
+}
