@@ -23,7 +23,7 @@ if (PROD) {
 
 app.use(bodyParser.json())
 
-app.post('/addCard', async (req, res) => {
+app.post('/api/addCard', async (req, res) => {
     try {
         const reqBody = {
             "paymentInstrument": {
@@ -53,7 +53,7 @@ app.post('/addCard', async (req, res) => {
     }
 });
 
-app.delete('/deleteCard', async (req, res) => {
+app.delete('/api/deleteCard', async (req, res) => {
     try {
         const response = await axios.delete(req.body.tokenHref)
         res.status(response.status).send(response.data);
