@@ -130,6 +130,27 @@ a {
     border-bottom-right-radius: 1.5rem;
 }
 
+.cardList .front {
+    background: #015b7e;
+    min-height: 200px;
+    /* padding-top: 3.8rem; */
+    border-radius: 1.5rem;
+    position: relative;
+    z-index: 999;
+}
+
+.cardList .item {
+    background: grey;
+    height: 20px;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-bottom: 1rem;
+    border-radius: 1.5rem;
+    position: relative;
+    z-index: 999;
+}
+
+
 .footer {
     position: absolute;
     left: 1.5rem;
