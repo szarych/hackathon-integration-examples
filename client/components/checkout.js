@@ -7,7 +7,7 @@ export function Card() {
   useEffect(() => {
     window.Worldpay.checkout.init(
       {
-        id: "dd0ea6d1-6a59-4fc2-89b3-f50296d7aec5",
+        id: "efdf8ca3-97fe-4b79-9034-0daabe16f669",
         form: "#card",
         fields: {
           pan: {
@@ -48,7 +48,7 @@ export function Card() {
 
   function createVerifiedToken(session) {
     request
-    .post('/addCard')
+    .post('/api/addCard')
     .then(response => {
         this.setState({
             message: response.data,
@@ -65,7 +65,7 @@ export function Card() {
         }
 
         console.log(session)
-        // createVerifiedToken(session);
+        createVerifiedToken(session);
       });
   }
 
