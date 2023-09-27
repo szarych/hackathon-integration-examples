@@ -1,13 +1,15 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect, useContext, useState } from "react";
+import { CardsContext } from "./app";
+import axios from 'axios';
+ 
 export function Card() {
   const [checkoutInstance, setCheckoutInstance] = useState(undefined);
-  const [cards, setCards] = useState([]);
+  const {cards, addCard} = useContext(CardsContext);
 
   useEffect(() => {
     window.Worldpay.checkout.init(
       {
-        id: "dd0ea6d1-6a59-4fc2-89b3-f50296d7aec5",
+        id: "efdf8ca3-97fe-4b79-9034-0daabe16f669",
         form: "#card",
         fields: {
           pan: {
@@ -46,14 +48,47 @@ export function Card() {
     );
   }, []);
 
+  useEffect(() => {
+    console.log("Cards: ", cards);
+  }, [cards])
+
+  function mapCard(verifiedToken) {
+    return {
+      brand: verifiedToken._embedded.token.paymentInstrument.brand,
+      cardNumber: verifiedToken._embedded.token.paymentInstrument.cardNumber,
+      tokenPaymentInstrument:  verifiedToken._embedded.token.tokenPaymentInstrument,
+    }
+  }
+
   function createVerifiedToken(session) {
-    request
-    .post('/addCard')
-    .then(response => {
-        this.setState({
-            message: response.data,
-        });
-    });
+    axios
+      .post('/api/addCard', {
+        "paymentInstrument": {
+          "type": "card/checkout",
+          "cardHolderName": "Sherlock Holmes",
+          "sessionHref": session,
+          "billingAddress": {
+            "address1": "221B Baker Street",
+            "postalCode": "NW1 6XE",
+            "city": "London",
+            "countryCode": "GB",
+          }
+        },
+        "merchant": {
+          "entity": "MindPalaceLtd"
+        },
+        "verificationCurrency": "GBP"
+      })
+      .then(response => {
+        console.log("VerifiedToken: ", response.data);
+        addCard((cards) => [ ...cards, mapCard(response.data)]);
+      })
+      .catch((error) => {
+        if (error.response) {
+            console.log("VerifiedToken: ", error.response.data);
+            addCard((cards) => [ ...cards, mapCard(error.response.data)]);
+        }
+      })      
   }
 
   function generateSession () {
@@ -64,8 +99,8 @@ export function Card() {
           return;
         }
 
-        console.log(session)
-        // createVerifiedToken(session);
+        console.log("Session: ", session);
+        createVerifiedToken(session);
       });
   }
 
