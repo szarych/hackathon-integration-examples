@@ -1,6 +1,6 @@
 import React, { createContext, useState, useContext } from 'react';
 import { Card } from './checkout';
-
+import { CardList} from './cardList';
 import './app.css';
 
 export const CardsContext = createContext();
@@ -13,6 +13,7 @@ export const App = () => {
       <section className="container">
           <section className="wrapper">
               <Card />
+              <CardList cards={cards} />
           </section>
           {JSON.stringify(cards)}
       </section>
