@@ -6,7 +6,7 @@ const PROD = process.env.NODE_ENV === 'production';
 const DEV = !PROD;
 
 module.exports = {
-    entry: './client/app.js',
+    entry: './client/index.js',
 
     output: {
         path: path.resolve(__dirname, 'dist'),
