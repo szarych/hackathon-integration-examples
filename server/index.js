@@ -31,21 +31,34 @@ app.post('/addCard', async (req, res) => {
                 "cardHolderName": req.body.cardHolderName,
                 "sessionHref": req.body.sessionHref,
                 "billingAddress": {
-                  "address1": req.body.address1,
-                  "postalCode": req.body.postalCode,
-                  "city": req.body.city,
-                  "countryCode": req.body.countryCode
+                    "address1": req.body.address1,
+                    "postalCode": req.body.postalCode,
+                    "city": req.body.city,
+                    "countryCode": req.body.countryCode
                 }
-              },
-              "merchant": {
+            },
+            "merchant": {
                 "entity": "default"
-              },
-              "verificationCurrency": "GBP"
+            },
+            "verificationCurrency": "GBP"
         }
 
         const response = await axios.post(vtEndpoint, reqBody, { headers: tokenHeaders })
         res.status(response.status).send(response.data);
     } catch (error) {
+        console.log(error)
+        if (error.response) {
+            res.status(error.response.status).send(error.response.data)
+        }
+    }
+});
+
+app.delete('/deleteCard', async (req, res) => {
+    try {
+        const response = await axios.delete(req.body.tokenHref)
+        res.status(response.status).send(response.data);
+    }
+    catch (error) {
         console.log(error)
         if (error.response) {
             res.status(error.response.status).send(error.response.data)
