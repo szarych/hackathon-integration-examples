@@ -23,18 +23,22 @@ if (PROD) {
 
 app.use(bodyParser.json())
 
+app.get('/api/check', (req, res) => {
+    res.send('Build something amazing! 🚀');
+});
+
 app.post('/api/addCard', async (req, res) => {
     try {
         const reqBody = {
             "paymentInstrument": {
                 "type": "card/checkout",
-                "cardHolderName": req.body.cardHolderName,
-                "sessionHref": req.body.sessionHref,
+                "cardHolderName": req.body.paymentInstrument.cardHolderName,
+                "sessionHref": req.body.paymentInstrument.sessionHref,
                 "billingAddress": {
-                    "address1": req.body.address1,
-                    "postalCode": req.body.postalCode,
-                    "city": req.body.city,
-                    "countryCode": req.body.countryCode
+                    "address1": req.body.paymentInstrument.billingAddress.address1,
+                    "postalCode": req.body.paymentInstrument.billingAddress.postalCode,
+                    "city": req.body.paymentInstrument.billingAddress.city,
+                    "countryCode": req.body.paymentInstrument.billingAddress.countryCode
                 }
             },
             "merchant": {
