@@ -23,18 +23,13 @@ if (PROD) {
 
 app.use(bodyParser.json())
 
-app.post('/api/addCard', async (req, res) => {
+app.post('/addCard', async (req, res) => {
     try {
         const reqBody = {
             "paymentInstrument": {
-                "type": "card/plain",
+                "type": "card/checkout",
                 "cardHolderName": req.body.cardHolderName,
-                "cardNumber": req.body.cardNumber,
-                "cardExpiryDate": {
-                  "month": req.body.cardExpiryDate.month,
-                  "year": req.body.cardExpiryDate.year
-                },
-                "cvc": req.body.cvc,
+                "sessionHref": req.body.sessionHref,
                 "billingAddress": {
                   "address1": req.body.address1,
                   "postalCode": req.body.postalCode,
@@ -49,11 +44,12 @@ app.post('/api/addCard', async (req, res) => {
         }
 
         const response = await axios.post(vtEndpoint, reqBody, { headers: tokenHeaders })
-        res.send(response.data);
+        res.status(response.status).send(response.data);
     } catch (error) {
         console.log(error)
-        res.status(error.response.status)
-        res.send(error.response.data)
+        if (error.response) {
+            res.status(error.response.status).send(error.response.data)
+        }
     }
 });
 
