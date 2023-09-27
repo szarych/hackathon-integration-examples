@@ -1,9 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useContext, useState } from "react";
+import { CardsContext } from "./app";
 import axios from 'axios';
  
 export function Card() {
   const [checkoutInstance, setCheckoutInstance] = useState(undefined);
-  const [cards, setCards] = useState([]); 
+  const {cards, addCard} = useContext(CardsContext);
 
   useEffect(() => {
     window.Worldpay.checkout.init(
@@ -80,12 +81,12 @@ export function Card() {
       })
       .then(response => {
         console.log("VerifiedToken: ", response.data);
-        setCards((cards) => [ ...cards, mapCard(response.data)]);
+        addCard((cards) => [ ...cards, mapCard(response.data)]);
       })
       .catch((error) => {
         if (error.response) {
             console.log("VerifiedToken: ", error.response.data);
-            setCards((cards) => [ ...cards, mapCard(error.response.data)]);
+            addCard((cards) => [ ...cards, mapCard(error.response.data)]);
         }
       })      
   }
