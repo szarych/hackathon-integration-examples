@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 
 export function Card() {
   const [checkoutInstance, setCheckoutInstance] = useState(undefined);
-  
+
   useEffect(() => {
     window.Worldpay.checkout.init(
       {
@@ -37,22 +37,12 @@ export function Card() {
       },
       function (error, checkout) {
         if (error) {
-          // reject(error);
+          console.error(error);
         } else {
-          setCheckoutInstance(checkout)
-          // resolve(checkout);
+          setCheckoutInstance(checkout);
         }
       },
     );
-    // loadCheckoutScript(checkoutScriptUrl)
-    //   .then(() => {
-    //     addWorldpayCheckoutToPage()
-    //       .then((checkoutInstance) => {
-    //         checkout = checkoutInstance;
-    //       })
-    //       .catch(console.warn);
-    //   })
-    //   .catch(console.warn);
   }, []);
 
   function generateSession () {
@@ -67,8 +57,6 @@ export function Card() {
       });
   }
 
-
-
   return (
     <div>
       <h1 className="title">Add new card</h1>
@@ -76,13 +64,13 @@ export function Card() {
       <div className="card" id="card">
           <div className="front">
               <div className="card-type"><img src="https://developer.worldpay.com/assets/embeddable/checkout/img/visa-logo.png"></img></div>
-              <label for="card-pan">Card number</label>
+              <label htmlFor="card-pan">Card number</label>
               <div id="card-pan" className="field pan"></div>
-              <label for="card-expiry">Expiry date</label>
+              <label htmlFor="card-expiry">Expiry date</label>
               <div id="card-expiry" className="field expiry"></div>
           </div>
           <div className="back">
-              <label for="card-cvc">Code</label>
+              <label htmlFor="card-cvc">Code</label>
               <div id="card-cvc" className="field cvc"></div>
               <p className="text">The number on the back of the card</p>
           </div>
