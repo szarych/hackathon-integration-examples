@@ -11,3 +11,10 @@ Node v16.19.0
 
 `npm run start` - build and start
 
+## Running locally
+
+To run locally, create a `.env` file at the root of the project with your TRY credentials
+```
+wpUsername=
+wpPassword=
+```
