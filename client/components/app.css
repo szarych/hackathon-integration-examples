@@ -162,6 +162,28 @@ a {
     bottom: 2rem;
 }
 
+.card .card__form.visa .card__type {
+    background: url(../../img/visa-logo.png) no-repeat right;
+  }
+  
+.card .card__form.mastercard .card__type {
+    background: url(../../img/master-card-logo.png) no-repeat right;
+  }
+  
+.card .card__form.amex .card__type {
+    background: url(../../img/amex-logo.png) no-repeat right;
+  }
+  
+.card .card__type {
+    position: relative;
+    background: url(../../img/cards-logo.png) no-repeat;
+    background-position: right;
+    display: block;
+    width: auto;
+    height: 2.5rem;
+    margin-bottom: 6rem;
+}
+
 .btn {
     width: 100%;
     border-radius: 1.2rem;
