@@ -1,10 +1,24 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useState } from "react";
+import axios from 'axios';
 
 export function CardList({cards}) {
 
   const [active, setActive] = useState();
 
-  
+  const deleteCard = () => {
+    console.log(cards[active]);
+    axios
+      .post('/api/deleteCard', {
+        tokenHref: cards[active].tokenPaymentInstrument.href
+      })
+      .then(response => {
+        if (response.status == 204) {
+          cards.splice(active, 1);
+          setActive();
+        }
+      })
+  }
+
   return (
     <div>
       <h1 className="title">Payment Details</h1>
@@ -20,6 +34,9 @@ export function CardList({cards}) {
               ))
             }
             </ul>
+            { active != undefined &&
+              <button className="btn-secondary add-card-btn" onClick={deleteCard}>Delete</button>
+            }
           </div>
       </div>
 
