@@ -136,7 +136,6 @@ a {
 
 .cardList .front {
     background: #015b7e;
-    min-height: 200px;
     padding: 1rem;
     border-radius: 1.5rem;
     position: relative;
@@ -178,7 +177,31 @@ a {
     right: 1.5rem;
     bottom: 2rem;
 }
-
+.btn.back-btn {
+    position: absolute;
+    width: 2rem;
+    height: 2rem;
+    left: 1.5rem;
+    background: #4dafe0;
+    font-size: 1rem;
+    line-height: 2.1rem;
+    padding: 0;
+    margin: 0;
+}
+.btn.add-new-card-btn {
+    background-color: #4dafe0;
+}
+.btn.back-btn:hover, .btn.add-new-card-btn:hover {
+    background-color: #79c2e7;
+}
+.btn.add-new-card-btn span {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 300;
+}
+.btn.add-card-btn:hover {
+    background-color: #6ed765;
+}
 .btn {
     width: 100%;
     border-radius: 1.2rem;

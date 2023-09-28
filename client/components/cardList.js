@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { CardsContext } from "./app";
 import axios from 'axios';
 
 export function CardList({cards}) {
-
+  const {setDisplay} = useContext(CardsContext);
   const [active, setActive] = useState();
 
   const deleteCard = () => {
@@ -37,6 +38,7 @@ export function CardList({cards}) {
             { active != undefined &&
               <button className="btn-secondary add-card-btn" onClick={deleteCard}>Delete</button>
             }
+            <button className="btn add-new-card-btn" onClick={() => setDisplay('add-card')}>Add card <span>+</span></button>
           </div>
       </div>
 

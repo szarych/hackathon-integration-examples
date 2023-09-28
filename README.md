@@ -11,6 +11,14 @@ Node v16.19.0
 
 `npm run start` - build and start
 
+## Test cards
+
+Visa 4242424242424242
+
+Mastercard 5555555555554444
+
+Amex 378282246310005
+
 ## Running locally
 
 To run locally, create a `.env` file at the root of the project with your TRY credentials
