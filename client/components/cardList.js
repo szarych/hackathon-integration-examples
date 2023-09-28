@@ -31,11 +31,11 @@ export function CardList({cards}) {
               {cards.map((card, index) => (
                 <li key={index}>
                   <div className={active === index ? 'item active': "item"} onClick={() => active === index ? setActive() : setActive(index)}>
-                    <img src="https://developer.worldpay.com/assets/embeddable/checkout/img/visa-logo.png" /><span>{card.cardNumber}</span>
+                    <div className={`card-logo ${card.brand.toLowerCase()}`}></div><span>{card.cardNumber}</span>
                   </div>
                   { active === index &&
                     <button className="delete-card-btn" onClick={deleteCard}>x</button>
-                  }
+                  } 
                 </li>
               ))
             }
