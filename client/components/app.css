@@ -177,6 +177,46 @@ a {
     right: 1.5rem;
     bottom: 2rem;
 }
+.item .card-logo {
+    content: " ";
+    display: block;
+    height: 15px;
+    background-size: 60%;
+}
+
+.card.visa .card-logo, .item .card-logo.visa {
+    background-image: url(https://developer.worldpay.com/assets/embeddable/checkout/img/visa-logo.png);
+    background-repeat: no-repeat;
+    width: 70px;
+}
+.card.mastercard .card-logo, .item .card-logo.mastercard, .item .card-logo.ecmc {
+    background-image: url(https://developer.worldpay.com/assets/embeddable/checkout/img/master-card-logo.png);
+    background-repeat: no-repeat;
+    width: 60px;
+}
+.card.amex .card-logo, .item .card-logo.amex {
+    background-image: url(https://developer.worldpay.com/assets/embeddable/checkout/img/amex-logo.png);
+    background-repeat: no-repeat;
+    width: 70px;
+}
+.item .card-logo.mastercard, .item .card-logo.ecmc {
+    background-size: 45%;
+}
+
+.card .card-logo {
+    position: absolute;
+    top: 0.5rem;
+    right: 1rem;
+    background-image: url(https://developer.worldpay.com/assets/embeddable/checkout/img/cards-logo.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 80%;
+    display: block;
+    content: " ";
+    width: 240px;
+    height: 40px;
+}
+
 .btn.back-btn {
     position: absolute;
     width: 2rem;

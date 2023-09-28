@@ -15,7 +15,7 @@ export function CardList({cards}) {
             <ul>
               {cards.map((card, index) => (
                 <li key={index} className={active === index ? 'item active': "item"} onClick={() => active === index ? setActive() : setActive(index)}>
-                  <img src="https://developer.worldpay.com/assets/embeddable/checkout/img/visa-logo.png" /><span>{card.cardNumber}</span>
+                  <div className={`card-logo ${card.brand.toLowerCase()}`}></div><span>{card.cardNumber}</span>
                 </li>
               ))
             }
