@@ -116,7 +116,7 @@ export function Card() {
 
       <div className="card" id="card">
           <div className="front">
-              <div className="card-type"><img src="https://developer.worldpay.com/assets/embeddable/checkout/img/visa-logo.png"></img></div>
+              <div className="card-logo"></div>
               <label htmlFor="card-pan">Card number</label>
               <div id="card-pan" className="field pan"></div>
               <label htmlFor="card-expiry">Expiry date</label>
