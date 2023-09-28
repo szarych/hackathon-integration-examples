@@ -61,7 +61,7 @@ app.post('/api/addCard', async (req, res) => {
     }
 });
 
-app.delete('/api/deleteCard', async (req, res) => {
+app.post('/api/deleteCard', async (req, res) => {
     try {
         const response = await axios.delete(req.body.tokenHref, { headers: authHeader })
         res.status(response.status).send(response.data);
