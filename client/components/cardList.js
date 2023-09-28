@@ -34,7 +34,7 @@ export function CardList({cards}) {
                     <div className={`card-logo ${card.brand.toLowerCase()}`}></div><span>{card.cardNumber}</span>
                   </div>
                   { active === index &&
-                    <button className="delete-card-btn" onClick={deleteCard}>x</button>
+                    <button className="delete-card-btn" onClick={deleteCard}>&#10006;</button>
                   } 
                 </li>
               ))

@@ -147,19 +147,28 @@ a {
     margin-bottom: 1rem;
 }
 
+.cardList .front ul li {
+    position: relative;
+}
+
 .cardList .item {
     background: #09364c;
     color: black;
     margin-bottom: .5rem;
     display: flex;
     align-items: center;
+    position: relative;
+    width: 100%;
     justify-content: space-between;
+    z-index: 999;
     padding: 1rem;
     border-radius: 1.5rem;
     cursor: pointer;
+    transition: all .2s ease-in-out;
 }
 .cardList .item.active {
     background: #071319;
+    width: 85%;
 }
 .cardList .item img {
     height: 1rem;
@@ -261,8 +270,22 @@ a {
 }
 
 .delete-card-btn {
-    background-color: transparent;
-    color: #ff1f3e;
+    color: #fff;
+    position: absolute;
     cursor: pointer;
-    border: 0;
+    top: 0.5rem;
+    font-size: 1rem;
+    right: 0rem;
+    width: 2rem;
+    z-index: 0;
+    border-radius: 50%;
+    height: 2rem;
+    background: #b4164c;
+    border: none;
+    animation: fadeIn .4s;
 }
+
+@keyframes fadeIn {
+    0% { opacity: 0; }
+    100% { opacity: 1; }
+  }
