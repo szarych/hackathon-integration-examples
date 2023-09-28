@@ -156,8 +156,6 @@ a {
     justify-content: space-between;
     padding: 1rem;
     border-radius: 1.5rem;
-}
-.cardList .item {
     cursor: pointer;
 }
 .cardList .item.active {
@@ -222,23 +220,9 @@ a {
     transition: all .2s ease-in-out;
 }
 
-.btn-secondary {
-    width: 100%;
-    border-radius: 1.2rem;
-    height: 3rem;
-    display: inline-block;
-    font-size: 1.125rem;
-    line-height: 1.125rem;
-    text-align: center;
-    cursor: pointer;
-    line-height: 1.5rem;
-    font-weight: 700;
-    outline: none;
-    margin: 0.25rem 1rem 0.25rem 0;
-    transition: all .2s ease-in-out;
-
+.delete-card-btn {
     background-color: transparent;
-    padding: 0.5rem 1.5rem;
-    color: #fff;
-    border: 2px solid #4bcd3e;
+    color: #ff1f3e;
+    cursor: pointer;
+    border: 0;
 }

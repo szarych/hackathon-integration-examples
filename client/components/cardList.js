@@ -29,15 +29,18 @@ export function CardList({cards}) {
             <h2>Credit cards</h2>
             <ul>
               {cards.map((card, index) => (
-                <li key={index} className={active === index ? 'item active': "item"} onClick={() => active === index ? setActive() : setActive(index)}>
-                  <img src="https://developer.worldpay.com/assets/embeddable/checkout/img/visa-logo.png" /><span>{card.cardNumber}</span>
+                <li key={index}>
+                  <div className={active === index ? 'item active': "item"} onClick={() => active === index ? setActive() : setActive(index)}>
+                    <img src="https://developer.worldpay.com/assets/embeddable/checkout/img/visa-logo.png" /><span>{card.cardNumber}</span>
+                  </div>
+                  { active === index &&
+                    <button className="delete-card-btn" onClick={deleteCard}>x</button>
+                  }
                 </li>
               ))
             }
             </ul>
-            { active != undefined &&
-              <button className="btn-secondary add-card-btn" onClick={deleteCard}>Delete</button>
-            }
+
             <button className="btn add-new-card-btn" onClick={() => setDisplay('add-card')}>Add card <span>+</span></button>
           </div>
       </div>
