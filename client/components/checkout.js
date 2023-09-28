@@ -1,10 +1,11 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import { CardsContext } from "./app";
 import axios from 'axios';
  
 export function Card() {
-  const [checkoutInstance, setCheckoutInstance] = useState(undefined);
-  const {cards, addCard} = useContext(CardsContext);
+  const {cards, addCard, setDisplay} = useContext(CardsContext);
+
+  let checkoutInstance;
 
   useEffect(() => {
     window.Worldpay.checkout.init(
@@ -42,10 +43,14 @@ export function Card() {
         if (error) {
           console.error(error);
         } else {
-          setCheckoutInstance(checkout);
+          checkoutInstance = checkout;
         }
       },
     );
+
+    return () => {
+      checkoutInstance.remove();
+    };
   }, []);
 
   useEffect(() => {
@@ -101,12 +106,13 @@ export function Card() {
 
         console.log("Session: ", session);
         createVerifiedToken(session);
+        setDisplay('card-list');
       });
   }
 
   return (
     <div>
-      <h1 className="title">Add new card</h1>
+      <h1 className="title"><button className="btn back-btn" onClick={() => setDisplay('card-list')}>{'<'}</button>Add new card</h1>
 
       <div className="card" id="card">
           <div className="front">

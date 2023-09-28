@@ -1,9 +1,9 @@
 import React, { useEffect, useContext, useState } from "react";
+import { CardsContext } from "./app";
 
 export function CardList({cards}) {
-
+  const {setDisplay} = useContext(CardsContext);
   const [active, setActive] = useState();
-
   
   return (
     <div>
@@ -20,6 +20,7 @@ export function CardList({cards}) {
               ))
             }
             </ul>
+            <button className="btn add-new-card-btn" onClick={() => setDisplay('add-card')}>Add card <span>+</span></button>
           </div>
       </div>
 
