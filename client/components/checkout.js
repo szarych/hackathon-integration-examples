@@ -53,10 +53,6 @@ export function Card() {
     };
   }, []);
 
-  useEffect(() => {
-    console.log("Cards: ", cards);
-  }, [cards])
-
   function mapCard(verifiedToken) {
     return {
       brand: verifiedToken._embedded.token.paymentInstrument.brand,
